@@ -10,10 +10,7 @@
     },
     {
       "src": "server/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**"]
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -25,5 +22,10 @@
       "src": "/(.*)",
       "dest": "/dist/public/$1"
     }
-  ]
+  ],
+  "functions": {
+    "server/index.ts": {
+      "maxDuration": 30
+    }
+  }
 }
