@@ -13,6 +13,8 @@ This is a full-stack web application for BestWorth Law Firm built with a modern 
 ✓ Improved professional theme with refined color scheme and typography
 ✓ Modified consultation flow to be scheduling-based rather than payment-based
 ✓ Updated branding to focus on single attorney practice (Sarah BestWorth, Esq.)
+✓ Switched to Supabase database for persistent data storage
+✓ Updated database configuration to use postgres-js driver
 
 ## User Preferences
 
