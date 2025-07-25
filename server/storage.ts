@@ -1,4 +1,7 @@
 import { type Contact, type InsertContact, type Consultation, type InsertConsultation } from "@shared/schema";
+import { contacts, consultations } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -12,59 +15,40 @@ export interface IStorage {
   updateConsultationStatus(id: string, status: string): Promise<Consultation | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private contacts: Map<string, Contact>;
-  private consultations: Map<string, Consultation>;
-
-  constructor() {
-    this.contacts = new Map();
-    this.consultations = new Map();
+export class DatabaseStorage implements IStorage {
+  async getContacts(): Promise<Contact[]> {
+    return await db.select().from(contacts);
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const id = randomUUID();
-    const contact: Contact = {
-      ...insertContact,
-      id,
-      phone: insertContact.phone || null,
-      createdAt: new Date(),
-    };
-    this.contacts.set(id, contact);
+    const [contact] = await db
+      .insert(contacts)
+      .values(insertContact)
+      .returning();
     return contact;
   }
 
-  async getContacts(): Promise<Contact[]> {
-    return Array.from(this.contacts.values());
+  async getConsultationById(id: string): Promise<Consultation | undefined> {
+    const [consultation] = await db.select().from(consultations).where(eq(consultations.id, id));
+    return consultation || undefined;
   }
 
   async createConsultation(insertConsultation: InsertConsultation): Promise<Consultation> {
-    const id = randomUUID();
-    const consultation: Consultation = {
-      ...insertConsultation,
-      id,
-      phone: insertConsultation.phone || null,
-      status: "scheduled",
-      createdAt: new Date(),
-    };
-    this.consultations.set(id, consultation);
+    const [consultation] = await db
+      .insert(consultations)
+      .values(insertConsultation)
+      .returning();
     return consultation;
   }
 
-  async getConsultationById(id: string): Promise<Consultation | undefined> {
-    return this.consultations.get(id);
-  }
-
   async updateConsultationStatus(id: string, status: string): Promise<Consultation | undefined> {
-    const consultation = this.consultations.get(id);
-    if (!consultation) return undefined;
-
-    const updated: Consultation = {
-      ...consultation,
-      status,
-    };
-    this.consultations.set(id, updated);
-    return updated;
+    const [consultation] = await db
+      .update(consultations)
+      .set({ status })
+      .where(eq(consultations.id, id))
+      .returning();
+    return consultation || undefined;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
