@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(218, 32%, 20%);
+  --muted: hsl(210, 14%, 97%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(218, 32%, 20%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(218, 32%, 20%);
+  --border: hsl(210, 10%, 85%);
+  --input: hsl(210, 10%, 95%);
+  --primary: hsl(41, 85%, 48%);
+  --primary-foreground: hsl(218, 32%, 20%);
+  --secondary: hsl(210, 14%, 97%);
+  --secondary-foreground: hsl(218, 32%, 20%);
+  --accent: hsl(210, 14%, 97%);
+  --accent-foreground: hsl(218, 32%, 20%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(41, 85%, 48%);
+  --radius: 0.75rem;
+  
+  /* Custom colors for professional law firm */
+  --navy: hsl(218, 32%, 20%);
+  --gold: hsl(41, 85%, 48%);
+  --deep-gold: hsl(41, 85%, 42%);
+  --cream: hsl(46, 20%, 98%);
+  --light-gray: hsl(210, 14%, 97%);
+  --warm-gray: hsl(25, 8%, 95%);
+}
+
+.dark {
+  --background: hsl(218, 32%, 8%);
+  --foreground: hsl(210, 14%, 97%);
+  --muted: hsl(218, 20%, 15%);
+  --muted-foreground: hsl(210, 10%, 65%);
+  --popover: hsl(218, 32%, 8%);
+  --popover-foreground: hsl(210, 14%, 97%);
+  --card: hsl(218, 20%, 12%);
+  --card-foreground: hsl(210, 14%, 97%);
+  --border: hsl(218, 20%, 20%);
+  --input: hsl(218, 20%, 15%);
+  --primary: hsl(41, 85%, 48%);
+  --primary-foreground: hsl(218, 32%, 8%);
+  --secondary: hsl(218, 20%, 15%);
+  --secondary-foreground: hsl(210, 14%, 97%);
+  --accent: hsl(218, 20%, 15%);
+  --accent-foreground: hsl(210, 14%, 97%);
+  --destructive: hsl(0, 62.8%, 45%);
+  --destructive-foreground: hsl(210, 14%, 97%);
+  --ring: hsl(41, 85%, 48%);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Custom utility classes */
+.text-navy {
+  color: var(--navy);
+}
+
+.bg-navy {
+  background-color: var(--navy);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.bg-gold {
+  background-color: var(--gold);
+}
+
+.bg-deep-gold {
+  background-color: var(--deep-gold);
+}
+
+.bg-cream {
+  background-color: var(--cream);
+}
+
+.bg-light-gray {
+  background-color: var(--light-gray);
+}
+
+.bg-warm-gray {
+  background-color: var(--warm-gray);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+.hover\:bg-deep-gold:hover {
+  background-color: var(--deep-gold);
+}
+
+.hover\:text-gold:hover {
+  color: var(--gold);
+}
+
+.focus\:ring-gold:focus {
+  --tw-ring-color: var(--gold);
+}
+
+/* Professional enhancements */
+.gradient-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--deep-gold) 100%);
+}
+
+.gradient-navy {
+  background: linear-gradient(135deg, var(--navy) 0%, hsl(218, 32%, 15%) 100%);
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
