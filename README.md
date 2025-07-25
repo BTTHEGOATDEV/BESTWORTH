@@ -68,7 +68,9 @@ A professional law firm website built with React, TypeScript, and Express.js fea
 
 ### Step 3: Environment Variables
 1. In Vercel project settings, go to "Environment Variables"
-2. Add `DATABASE_URL` with your Supabase connection string from above
+2. Add these environment variables:
+   - `DATABASE_URL`: Your Supabase connection string from above
+   - `SENDGRID_API_KEY`: Your SendGrid API key (optional - for email notifications)
 3. Make sure to redeploy after adding environment variables
 
 ### Step 4: Deploy
@@ -90,7 +92,35 @@ npm run dev
 Create a `.env` file in your project root:
 ```
 DATABASE_URL=your_supabase_connection_string_here
+SENDGRID_API_KEY=your_sendgrid_api_key_here
 ```
+
+## Email Setup (Optional but Recommended)
+
+The contact form and consultation booking system can send email notifications. This requires a SendGrid account:
+
+### Step 1: Create SendGrid Account
+1. Go to [sendgrid.com](https://sendgrid.com) and create a free account (100 emails/day free tier)
+2. Complete the setup process and verify your account
+
+### Step 2: Create API Key
+1. In SendGrid dashboard, go to Settings → API Keys
+2. Click "Create API Key"
+3. Choose "Restricted Access" and give it a name like "BestWorth Website"
+4. Enable "Mail Send" permissions
+5. Click "Create & View" and copy the API key
+
+### Step 3: Verify Sender Domain (Important)
+1. In SendGrid, go to Settings → Sender Authentication
+2. Click "Verify a Single Sender"
+3. Add `noreply@bestworthlaw.com` as the sender email
+4. Complete the verification process
+
+### What the Email System Does:
+- **Contact Form**: Sends notifications to `sarah@bestworthlaw.com` when someone submits the contact form
+- **Consultation Booking**: Sends confirmation to the client and notification to the law firm
+- **Professional Templates**: Branded email templates with all contact details included
+- **Graceful Fallback**: Works without SendGrid (just logs to console) for development
 
 ## Contact Information
 
